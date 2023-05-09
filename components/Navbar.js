@@ -19,7 +19,7 @@ const Navbar = ({cart ,addToCart ,removeFromCart ,clearCart  ,subTotal}) => {
         }
     }
     return (
-        <div className='py-2 flex flex-col justify-center items-center md:flex-row md:justify-start shadow-md'>
+        <div className='py-2 flex flex-col justify-center items-center md:flex-row md:justify-start shadow-md sticky top-0 z-50 bg-white'>
             <div className='logo mx-5'>
                 <Image width={200} height={40} src="/logo2.png" />
             </div>
@@ -34,7 +34,7 @@ const Navbar = ({cart ,addToCart ,removeFromCart ,clearCart  ,subTotal}) => {
             <div onClick={toggleSidebar} className='cart absolute right-0 top-4 mx-5 text-2xl md:text-4xl font-bold'>
                 <AiOutlineShoppingCart />
             </div>
-            <div ref={ref} className='cartSideBar w-80 max-h-full overflow-y-auto bg-pink-200 fixed top-0 right-0 py-10 px-5  translate-x-full transition-transform '>
+            <div ref={ref} className='cartSideBar w-80 h-full overflow-y-auto bg-pink-200 fixed top-0 right-0 py-10 px-5  translate-x-full transition-transform '>
                 <AiFillCloseCircle onClick={toggleSidebar} className='absolute top-5 text-xl right-4 text-pink-600' />
                 <h1 className='text-center font-bold text-xl'>Shopping Cart</h1>
                 <ol className='list-decimal ml-5 '>
@@ -52,10 +52,6 @@ const Navbar = ({cart ,addToCart ,removeFromCart ,clearCart  ,subTotal}) => {
                         </div>
                     </li>
                     })}
-                    
-
-
-
                 </ol>
                 <div className='flex'>
                     <button class="flex mx-auto mt-16 text-white bg-pink-500 border-0 py-1 px-5 focus:outline-none hover:bg-pink-600 rounded text-lg"><BsFillBagCheckFill className='m-1' /> Checkout</button>
