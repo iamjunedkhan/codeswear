@@ -2,9 +2,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useRef } from 'react'
 import { AiOutlineShoppingCart, AiFillCloseCircle, AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
-import { BsFillBagCheckFill} from 'react-icons/bs';
+import { BsFillBagCheckFill } from 'react-icons/bs';
+import { MdAccountCircle } from 'react-icons/md';
 
-const Navbar = ({cart ,addToCart ,removeFromCart ,clearCart  ,subTotal}) => {
+const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
     // console.log(cart,addToCart,removeFromCart,clearCart,subTotal)
     const ref = useRef()
 
@@ -31,31 +32,34 @@ const Navbar = ({cart ,addToCart ,removeFromCart ,clearCart  ,subTotal}) => {
                     <Link href={"/mugs"}> <li>Mugs</li></Link>
                 </ul>
             </div>
-            <div onClick={toggleSidebar} className='cart absolute right-0 top-4 mx-5 text-2xl md:text-4xl font-bold'>
-                <AiOutlineShoppingCart />
+            <div className='cart absolute right-0 top-4 mx-5 text-2xl md:text-3xl font-bold flex'>
+                <Link href={"/login"} ><MdAccountCircle className='mx-3' /></Link>
+                <AiOutlineShoppingCart onClick={toggleSidebar} />
             </div>
             <div ref={ref} className='cartSideBar w-80 h-full overflow-y-auto bg-pink-200 fixed top-0 right-0 py-10 px-5  translate-x-full transition-transform '>
                 <AiFillCloseCircle onClick={toggleSidebar} className='absolute top-5 text-xl right-4 text-pink-600' />
                 <h1 className='text-center font-bold text-xl'>Shopping Cart</h1>
                 <ol className='list-decimal ml-5 '>
 
-                    {Object.keys(cart).length === 0  && <div className='py-4 font-semibold text-center '>Your Cart is empty.</div>}
-                    {Object.keys(cart).map((k)=>{
+                    {Object.keys(cart).length === 0 && <div className='py-4 font-semibold text-center '>Your Cart is empty.</div>}
+                    {Object.keys(cart).map((k) => {
                         return <li key={k} className='my-4'>
-                        <div className='flex  justify-center items-center space-x-2 font-bold'>
-                            <div >{cart[k].name}</div>
-                            <div className='flex justify-center items-center text-xl'>
-                                <AiFillPlusCircle onClick={()=>addToCart(k,1,cart[k].price,cart[k].name,cart[k].size, cart[k].variant)}  className='text-pink-600' />
-                                <span className='m-2'>{cart[k].qty}</span>
-                                <AiFillMinusCircle onClick={()=>removeFromCart(k,1,cart[k].price,cart[k].name,cart[k].size, cart[k].variant)} className='text-pink-600' />
+                            <div className='flex  justify-center items-center space-x-2 font-bold'>
+                                <div >{cart[k].name}</div>
+                                <div className='flex justify-center items-center text-xl'>
+                                    <AiFillPlusCircle onClick={() => addToCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant)} className='text-pink-600' />
+                                    <span className='m-2'>{cart[k].qty}</span>
+                                    <AiFillMinusCircle onClick={() => removeFromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant)} className='text-pink-600' />
+                                </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
                     })}
                 </ol>
+
+                <div className='text-xl font-bold m-2'> SubTotal:{subTotal}</div>
                 <div className='flex'>
-                   <Link href={"/checkout"} ><button class="flex mx-auto mt-16 text-white bg-pink-500 border-0 py-1 px-5 focus:outline-none hover:bg-pink-600 rounded text-lg"><BsFillBagCheckFill className='m-1' /> Checkout</button></Link> 
-                    <button class="flex mx-auto mt-16 text-white bg-pink-500 border-0 py-1 px-5 focus:outline-none hover:bg-pink-600 rounded text-lg" onClick={clearCart}>Clear Cart</button>
+                    <Link href={"/checkout"} ><button class="flex mx-auto mt-8 text-white bg-pink-500 border-0 py-1 px-5 focus:outline-none hover:bg-pink-600 rounded text-lg"><BsFillBagCheckFill className='m-1' /> Checkout</button></Link>
+                    <button class="flex mx-auto mt-8 text-white bg-pink-500 border-0 py-1 px-5 focus:outline-none hover:bg-pink-600 rounded text-lg" onClick={clearCart}>Clear Cart</button>
                 </div>
             </div>
         </div>
